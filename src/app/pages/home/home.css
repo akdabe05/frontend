@@ -1,0 +1,38 @@
+.hero {
+  text-align: center;
+  background-color: #fdeef1;
+}
+
+.hero-img {
+  width: 100%;
+  height: auto;
+}
+
+.best-sellers {
+  padding: 50px 0;
+  text-align: center;
+  background: #fff;
+}
+
+.best-sellers h2 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  margin-bottom: 40px;
+}
+
+.product-grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 40px;
+}
+
+.express {
+  background-color: #fdeef1;
+  text-align: center;
+}
+
+.express-img {
+  width: 100%;
+  height: auto;
+}

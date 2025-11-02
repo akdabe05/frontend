@@ -1,0 +1,15 @@
+<div class="product-card">
+  <img [src]="product.image" [alt]="product.name" class="product-image" />
+
+  <h3 class="product-name">{{ product.name }}</h3>
+
+  <div class="product-details">
+    <div class="price">
+      <span>₱</span>{{ product.price }}
+    </div>
+    <div class="orders">
+      <img src="assets/images/add_cart.svg" alt="Add to cart" class="cart-icon" />
+      <span>{{ product.orders }} Orders</span>
+    </div>
+  </div>
+</div>
