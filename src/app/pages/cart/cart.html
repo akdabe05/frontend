@@ -1,1 +1,35 @@
-<p>cart works!</p>
+<div class="cart-page">
+  <div class="cart-header">
+    <label class="select-all">
+      <input type="checkbox" [checked]="selectAll" (change)="toggleSelectAll($event)" />
+      Select All
+    </label>
+    <button class="delete-selected" (click)="deleteSelected()" [disabled]="!hasSelected()">Delete Selected</button>
+  </div>
+
+  <div class="cart-list">
+    <app-cart-item
+      *ngFor="let item of cartItems"
+      [item]="item"
+      (remove)="removeItem($event)"
+      (quantityChange)="onQuantityChange($event)"
+      (selectionChange)="onSelectionChange($event)">
+    </app-cart-item>
+
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      <p>Your cart is empty.</p>
+    </div>
+  </div>
+
+  <!-- fixed bottom checkout bar -->
+  <div class="checkout-bar" role="region" aria-label="Checkout bar">
+    <div class="left">
+      <span class="selected-count">{{ selectedCount }} selected</span>
+      <span class="total">Total: ₱{{ getSelectedTotal() | number:'1.0-0' }}</span>
+    </div>
+
+    <div class="right">
+      <button class="checkout-btn" [disabled]="!hasSelected()">Check Out</button>
+    </div>
+  </div>
+</div>

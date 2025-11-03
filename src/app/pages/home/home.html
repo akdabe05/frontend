@@ -2,8 +2,17 @@
 
 <!-- HERO SECTION (Top Banner Image) -->
 <section class="hero">
-  <img src="assets/images/home_top.png" alt="Bouquetly Top Banner" class="hero-img" />
+  <div class="carousel">
+    <img
+      [src]="heroImages[currentIndex]"
+      alt="Bouquetly Hero Banner"
+      class="hero-img"
+    />
+    <button class="prev" (click)="prevImage()">❮</button>
+    <button class="next" (click)="nextImage()">❯</button>
+  </div>
 </section>
+
 
 <!-- BEST SELLERS SECTION -->
 <section class="best-sellers">

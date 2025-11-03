@@ -1,0 +1,120 @@
+.cart-page {
+  min-height: 100vh;
+  background-color: #fff5f5;
+  padding: 2.25rem 1rem 120px; /* bottom padding to avoid overlap with fixed bar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* header: select-all + delete selected */
+.cart-header {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+}
+
+.select-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.delete-selected {
+  background: none;
+  border: none;
+  color: #b84f71;
+  cursor: pointer;
+  font-weight: 600;
+  opacity: 1;
+}
+
+.delete-selected[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+/* list */
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 800px;
+  align-items: center;
+}
+
+.empty-cart {
+  margin-top: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+/* fixed checkout bar at bottom */
+.checkout-bar {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 18px;
+  display: flex;
+  justify-content: center;
+  pointer-events: none; /* center container non-interactive, children still interactive */
+}
+
+.checkout-bar > div {
+  pointer-events: auto;
+}
+
+.checkout-bar > div {
+  width: 100%;
+  max-width: 900px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.9), rgba(255,255,255,0.95));
+  box-shadow: 0 6px 20px rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 12px 18px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.checkout-bar .left {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+}
+
+.selected-count {
+  font-weight: 700;
+  color: #333;
+}
+
+.total {
+  font-weight: 800;
+  color: #cf5d82;
+  font-size: 1.1rem;
+}
+
+.checkout-btn {
+  background-color: #db709c;
+  border: none;
+  color: white;
+  font-weight: 700;
+  padding: 10px 20px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.checkout-btn[disabled] { opacity: 0.5; cursor: not-allowed; }
+
+/* small-screen adjustments */
+@media (max-width: 600px) {
+  .cart-page { padding-bottom: 140px; }
+  .item-img { width: 78px; height: 78px; }
+  .checkout-bar > div { padding: 10px 14px; }
+  .total { font-size: 1rem; }
+}
