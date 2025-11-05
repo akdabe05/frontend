@@ -7,7 +7,7 @@ export interface CartItem {
   price: number;
   quantity: number;
   imageUrl: string;
-  selected: boolean; // ✅ added for select/delete logic
+  selected: boolean;
 }
 
 @Injectable({
@@ -16,14 +16,14 @@ export interface CartItem {
 export class CartService {
   private cartItems: CartItem[] = [];
   private cartItemsSubject = new BehaviorSubject<CartItem[]>([]);
-  cartItems$ = this.cartItemsSubject.asObservable(); // ✅ renamed
+  cartItems$ = this.cartItemsSubject.asObservable();
 
   addToCart(item: CartItem) {
     const existing = this.cartItems.find(p => p.id === item.id);
     if (existing) {
       existing.quantity += item.quantity;
     } else {
-      this.cartItems.push({ ...item, selected: true }); // ✅ add default selected
+      this.cartItems.push({ ...item, selected: true });
     }
     this.cartItemsSubject.next([...this.cartItems]);
   }
@@ -37,7 +37,7 @@ export class CartService {
     this.cartItemsSubject.next([]);
   }
 
-  removeFromCart(id: number) { // ✅ rename to match usage in cart.ts
+  removeFromCart(id: number) {
     this.cartItems = this.cartItems.filter(item => item.id !== id);
     this.cartItemsSubject.next([...this.cartItems]);
   }

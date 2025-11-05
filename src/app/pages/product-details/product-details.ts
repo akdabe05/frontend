@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { HttpClient } from '@angular/common/http'; // ✅ Added import
+import { HttpClient } from '@angular/common/http';
 import { ProductService } from '../../services/product.service';
 import { Product } from '../../models/product.model';
 import { CartService } from '../../services/cart.service';
@@ -14,7 +14,7 @@ import { CartService } from '../../services/cart.service';
   styleUrls: ['./product-details.css']
 })
 export class ProductDetails implements OnInit {
-  product!: Product; // ✅ “!” means TypeScript knows this will be set
+  product!: Product;
   safeImageUrl: string = '/assets/images/fallback.png';
   selectedAddOns: string[] = [];
   totalPrice: number = 0;
@@ -37,7 +37,6 @@ export class ProductDetails implements OnInit {
     this.productService.getProductById(id).subscribe({
 next: (data) => {
   this.product = data;
-  // ✅ Use "image" if "imageUrl" doesn’t exist
   const imagePath = data.imageUrl || data.image;
   this.safeImageUrl = this.resolveImageUrl(data.imageUrl || data.image || '');
   this.totalPrice = data.price;
@@ -77,8 +76,6 @@ next: (data) => {
 addToCart(): void {
   if (!this.product) return;
 
-  // Add to cart without incrementing orders count
-  // Orders count will be updated when user actually places the order
   this.cartService.addToCart({
     id: this.product.id,
     name: this.product.name,

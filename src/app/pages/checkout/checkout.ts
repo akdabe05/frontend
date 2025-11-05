@@ -16,7 +16,6 @@ export class Checkout implements OnInit {
   cartItems: CartItem[] = [];
   isSubmitting = false;
   
-  // Customer details
   customerDetails = {
     fullName: '',
     email: '',
@@ -38,7 +37,6 @@ export class Checkout implements OnInit {
     this.cartService.cartItems$.subscribe(items => {
       this.cartItems = items.filter(item => item.selected);
       
-      // If no items selected, redirect to cart
       if (this.cartItems.length === 0) {
         this.router.navigate(['/cart']);
       }
@@ -71,7 +69,6 @@ export class Checkout implements OnInit {
           console.log('✅ Order created:', response);
           alert(`Order placed successfully! 🎉\nOrder ID: ${response.orderId}`);
           
-          // Clear cart and redirect
           this.cartService.clearCart();
           this.router.navigate(['/']);
         },

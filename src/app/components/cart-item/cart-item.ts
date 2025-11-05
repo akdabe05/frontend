@@ -23,7 +23,6 @@ export class CartItem {
   @Output() quantityChange = new EventEmitter<{ id: number; quantity: number }>();
   @Output() selectionChange = new EventEmitter<{ id: number; selected: boolean }>();
 
-  // emit when delete button clicked
   onRemove() {
     this.remove.emit(this.item.id);
   }

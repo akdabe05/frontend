@@ -20,7 +20,7 @@ export class ProductCard {
   ) {}
 
 addToCart(event: Event) {
-  event.stopPropagation(); // prevent routing when clicking icon
+  event.stopPropagation();
 
   const cartItem = {
     id: this.product.id,
@@ -33,10 +33,9 @@ addToCart(event: Event) {
 
   this.cartService.addToCart(cartItem);
 
-  // Update orders_count in DB
   this.productService.incrementOrders(this.product.id).subscribe({
     next: () => {
-      this.product.orders = (this.product.orders || 0) + 1; // instantly update UI
+      this.product.orders = (this.product.orders || 0) + 1;
     },
     error: (err) => console.error('Error updating orders count:', err)
   });

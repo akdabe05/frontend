@@ -33,14 +33,13 @@ export class Home implements OnInit, OnDestroy {
     this.loadBestSellers();
   }
 
-  // 🔥 Fetch 4 top/random products from backend
   loadBestSellers() {
 this.http.get<Product[]>('http://localhost:3000/api/products/top')
   .subscribe({
     next: (products) => {
       this.bestSellers = products.map(p => ({
         ...p,
-        orders_count: p.orders_count // 👈 make sure to map the field
+        orders_count: p.orders_count
       }));
     },
     error: (err) => {
