@@ -6,7 +6,7 @@
     <img
       [src]="heroImages[currentIndex]"
       alt="Bouquetly Hero Banner"
-      class="hero-img"
+      class="hero-image"
     />
     <button class="prev" (click)="prevImage()">❮</button>
     <button class="next" (click)="nextImage()">❯</button>
@@ -14,13 +14,16 @@
 </section>
 
 
-<!-- BEST SELLERS SECTION -->
 <section class="best-sellers">
   <h2>Bouquetly's Best Sellers!</h2>
   <div class="product-grid">
-    <app-product-card *ngFor="let product of bestSellers" [product]="product"></app-product-card>
+    <app-product-card
+      *ngFor="let product of bestSellers"
+      [product]="product">
+    </app-product-card>
   </div>
 </section>
+
 
 <!-- EXPRESS SECTION (Bottom Banner Image) -->
 <section class="express">

@@ -1,7 +1,7 @@
 <div class="cart-item">
   <div class="left-block">
     <input class="select-checkbox" type="checkbox" [checked]="item.selected" (change)="toggleSelection($event)" />
-    <img [src]="item.image" [alt]="item.name" class="item-img" />
+    <img [src]="item.imageUrl" [alt]="item.name" class="item-img" />
   </div>
 
   <div class="item-details">

@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
+import { CartService, CartItem as CartItemModel } from '../../services/cart.service';
 import { CartItem } from '../../components/cart-item/cart-item';
 
 @Component({
@@ -9,33 +11,31 @@ import { CartItem } from '../../components/cart-item/cart-item';
   templateUrl: './cart.html',
   styleUrls: ['./cart.css'],
 })
-export class Cart {
-  cartItems = [
-    { id: 1, name: 'GENTLE HEART', image: 'assets/images/products/gentle_heart.png', modification: 'None', quantity: 1, price: 899, selected: true },
-    { id: 2, name: 'PETAL WHISPER', image: 'assets/images/products/petal_whisper.png', modification: 'Ribbon Wrap', quantity: 2, price: 1299, selected: true },
-  ];
-
+export class Cart implements OnInit {
+  cartItems: CartItemModel[] = [];
   selectAll = true;
 
+  constructor(
+    private cartService: CartService,
+    private router: Router
+  ) {}
+
+  ngOnInit() {
+    this.cartService.cartItems$.subscribe(items => {
+      this.cartItems = items;
+      this.recomputeSelectAll();
+    });
+  }
+
   removeItem(id: number) {
-    this.cartItems = this.cartItems.filter(i => i.id !== id);
-    this.recomputeSelectAll();
-  }
-
-  onQuantityChange(payload: { id: number; quantity: number }) {
-    const item = this.cartItems.find(i => i.id === payload.id);
-    if (item) item.quantity = payload.quantity;
-  }
-
-  onSelectionChange(payload: { id: number; selected: boolean }) {
-    const item = this.cartItems.find(i => i.id === payload.id);
-    if (item) item.selected = payload.selected;
-    this.recomputeSelectAll();
+    this.cartService.removeFromCart(id);
   }
 
   toggleSelectAll(ev: Event) {
     this.selectAll = (ev.target as HTMLInputElement).checked;
-    this.cartItems = this.cartItems.map(i => ({ ...i, selected: this.selectAll }));
+    this.cartItems.forEach(item => {
+      this.cartService.updateSelection(item.id, this.selectAll);
+    });
   }
 
   recomputeSelectAll() {
@@ -43,8 +43,9 @@ export class Cart {
   }
 
   deleteSelected() {
-    this.cartItems = this.cartItems.filter(i => !i.selected);
-    this.recomputeSelectAll();
+    this.cartItems
+      .filter(i => i.selected)
+      .forEach(i => this.cartService.removeFromCart(i.id));
   }
 
   hasSelected(): boolean {
@@ -57,8 +58,24 @@ export class Cart {
       .reduce((sum, i) => sum + i.price * i.quantity, 0);
   }
 
-  /** 🟢 NEW: Getter to return number of selected items for template */
   get selectedCount(): number {
     return this.cartItems.filter(i => i.selected).length;
+  }
+
+  onQuantityChange(event: { id: number; quantity: number }) {
+    this.cartService.updateQuantity(event.id, event.quantity);
+  }
+
+  onSelectionChange(event: { id: number; selected: boolean }) {
+    this.cartService.updateSelection(event.id, event.selected);
+    this.recomputeSelectAll();
+  }
+
+  proceedToCheckout() {
+    if (this.hasSelected()) {
+      this.router.navigate(['/checkout']);
+    } else {
+      alert('Please select at least one item to checkout');
+    }
   }
 }

@@ -1,5 +1,5 @@
-<div class="product-card">
-  <img [src]="product.image" [alt]="product.name" class="product-image" />
+<div class="product-card" [routerLink]="['/product', product.id]">
+  <img [src]="product.imageUrl" [alt]="product.name" class="product-image" />
 
   <h3 class="product-name">{{ product.name }}</h3>
 
@@ -9,7 +9,7 @@
     </div>
     <div class="orders">
       <img src="assets/images/add_cart.svg" alt="Add to cart" class="cart-icon" />
-      <span>{{ product.orders }} Orders</span>
+      <span>{{ product.orders || product.orders_count || 0 }} Orders</span>
     </div>
   </div>
 </div>

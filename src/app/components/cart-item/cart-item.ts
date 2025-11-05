@@ -12,7 +12,7 @@ export class CartItem {
   @Input() item!: {
     id: number;
     name: string;
-    image: string;
+    imageUrl: string;
     modification?: string;
     quantity: number;
     price: number;

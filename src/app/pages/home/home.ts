@@ -1,8 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Footer } from '../../components/footer/footer';
-import { ProductCard } from '../../components/product-card/product-card';
+import { HttpClient } from '@angular/common/http';
 import { Product } from '../../models/product.model';
+import { ProductService } from '../../services/product.service';
+import { ProductCard } from '../../components/product-card/product-card';
+import { Footer } from '../../components/footer/footer';
 
 @Component({
   selector: 'app-home',
@@ -11,45 +13,58 @@ import { Product } from '../../models/product.model';
   templateUrl: './home.html',
   styleUrls: ['./home.css']
 })
-export class Home {
-
+export class Home implements OnInit, OnDestroy {
+  bestSellers: Product[] = [];
   heroImages: string[] = [
-  'assets/images/home_top.png',
-  'assets/images/home_top2.png',
-  'assets/images/home_top3.png'
-];
+    'assets/images/home_top.png',
+    'assets/images/home_top2.png',
+    'assets/images/home_top3.png'
+  ];
+  currentIndex = 0;
+  intervalId: any;
 
-currentIndex = 0;
-intervalId: any;
+  constructor(
+    private http: HttpClient,
+    private productService: ProductService
+  ) {}
 
-ngOnInit() {
-  this.startCarousel();
-}
+  ngOnInit(): void {
+    this.startCarousel();
+    this.loadBestSellers();
+  }
 
-startCarousel() {
-  this.intervalId = setInterval(() => {
-    this.nextImage();
-  }, 4000);
-}
+  // 🔥 Fetch 4 top/random products from backend
+  loadBestSellers() {
+this.http.get<Product[]>('http://localhost:3000/api/products/top')
+  .subscribe({
+    next: (products) => {
+      this.bestSellers = products.map(p => ({
+        ...p,
+        orders_count: p.orders_count // 👈 make sure to map the field
+      }));
+    },
+    error: (err) => {
+      console.error('Error loading products:', err);
+    }
+  });
 
-nextImage() {
-  this.currentIndex = (this.currentIndex + 1) % this.heroImages.length;
-}
+  }
 
-prevImage() {
-  this.currentIndex =
-    (this.currentIndex - 1 + this.heroImages.length) % this.heroImages.length;
-}
+  startCarousel() {
+    this.intervalId = setInterval(() => this.nextImage(), 4000);
+  }
 
-ngOnDestroy() {
-  clearInterval(this.intervalId);
-}
+  nextImage() {
+    this.currentIndex = (this.currentIndex + 1) % this.heroImages.length;
+  }
 
+  prevImage() {
+    this.currentIndex = (this.currentIndex === 0)
+      ? this.heroImages.length - 1
+      : this.currentIndex - 1;
+  }
 
-bestSellers = [
-  { name: 'Petal Whisper', price: 1450, image: 'assets/images/products/petal_whisper.png' },
-  { name: 'Woven Heart', price: 1700, image: 'assets/images/products/woven_heart.png' },
-  { name: 'Wild Garden', price: 1550, image: 'assets/images/products/wild_garden.png' },
-  { name: 'Fiesta Charm', price: 1650, image: 'assets/images/products/fiesta_charm.png' }
-];
+  ngOnDestroy() {
+    clearInterval(this.intervalId);
+  }
 }

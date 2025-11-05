@@ -8,9 +8,13 @@
 }
 
 .catalogue-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(230px, 1fr));
-  gap: 2rem;
-  width: 100%;
-  max-width: 1200px;
+  /* display: grid; */
+  /*grid-template-columns: repeat(auto-fit, minmax(230px, 1fr)); */
+ /*  gap: 2rem; */
+  width: 95%;
+  max-width: 1350px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 30px;
 }

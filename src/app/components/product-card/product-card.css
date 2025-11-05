@@ -51,6 +51,12 @@
 }
 
 .cart-icon {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.cart-icon:hover {
+  transform: scale(1.2);
 }
