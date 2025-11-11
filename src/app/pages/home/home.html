@@ -1,0 +1,28 @@
+<section class="hero">
+  <div class="carousel">
+    <img
+      [src]="heroImages[currentIndex]"
+      alt="Bouquetly Hero Banner"
+      class="hero-image"
+    />
+    <button class="prev" (click)="prevImage()">❮</button>
+    <button class="next" (click)="nextImage()">❯</button>
+  </div>
+</section>
+
+
+<section class="best-sellers">
+  <h2>Bouquetly's Best Sellers!</h2>
+  <div class="product-grid">
+    <app-product-card
+      *ngFor="let product of bestSellers"
+      [product]="product">
+    </app-product-card>
+  </div>
+</section>
+
+<section class="express">
+  <img src="assets/images/home_bottom.png" alt="Bouquetly Bottom Banner" class="express-img" />
+</section>
+
+<app-footer></app-footer>

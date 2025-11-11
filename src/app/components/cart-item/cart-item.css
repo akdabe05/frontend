@@ -1,0 +1,132 @@
+.cart-item {
+  background-color: #fdecec;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 14px 16px;
+  border-radius: 16px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.06);
+  width: 100%;
+  max-width: 800px;
+  box-sizing: border-box;
+  gap: 16px;
+  margin: 0 auto;
+}
+
+
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  max-width: 800px; /* same as cart-item */
+  margin: 0 auto;
+}
+
+.left-block {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.select-checkbox {
+  width: 18px;
+  height: 18px;
+  accent-color: #cf5d82;
+}
+
+.item-img {
+  width: 92px;
+  height: 92px;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+.item-details {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  font-family: 'Inter', sans-serif;
+  margin-left: 4px;
+}
+
+.item-name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 1.2rem;
+  color: #2b2b2b;
+}
+
+.item-mod {
+  margin: 0;
+  color: #666;
+  font-size: 0.92rem;
+}
+
+.item-price {
+  margin: 0;
+  margin-top: 6px;
+  font-weight: 700;
+}
+
+.quantity-controls {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.qty-btn {
+  width: 30px;
+  height: 30px;
+  border-radius: 6px;
+  border: none;
+  background: #db709c;
+  color: white;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.qty {
+  min-width: 28px;
+  text-align: center;
+  font-weight: 600;
+}
+
+.right-block {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40px;
+}
+
+.delete-btn {
+  background: none;
+  border: none;
+  padding: 6px;
+  cursor: pointer;
+}
+
+.delete-icon {
+  width: 22px;
+  height: 22px;
+  filter: invert(45%) sepia(38%) saturate(733%) hue-rotate(305deg) brightness(95%) contrast(95%);
+}
+
+/* Responsive: stack nicely */
+@media (max-width: 600px) {
+  .cart-item {
+    flex-direction: row;
+    align-items: center;
+    gap: 10px;
+    padding: 12px;
+  }
+
+  .item-img { width: 80px; height: 80px; }
+  .item-name { font-size: 1rem; }
+}

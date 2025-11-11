@@ -1,0 +1,129 @@
+.cart-page {
+  min-height: 100vh;
+  background-color: #fff5f5;
+  padding: 2.25rem 1rem 120px; /* bottom padding to avoid overlap with fixed bar */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  font-family: 'Inter', sans-serif;
+}
+
+/* header: select-all + delete selected */
+.cart-header {
+  width: 100%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 6px;
+}
+
+.select-all {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 600;
+  color: #333;
+}
+
+.delete-selected {
+  background: none;
+  border: none;
+  color: #b84f71;
+  cursor: pointer;
+  font-weight: 600;
+  opacity: 1;
+}
+
+.delete-selected[disabled] { opacity: 0.4; cursor: not-allowed; }
+
+/* list */
+.cart-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  align-items: center;
+}
+
+.empty-cart {
+  margin-top: 2rem;
+  text-align: center;
+  color: #666;
+}
+
+/* fixed checkout bar at bottom */
+.checkout-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: #fff;
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.08);
+  padding: 14px 24px;
+  z-index: 50;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* left side (selected count) */
+.checkout-bar .left {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  color: #333;
+  font-size: 1.1rem;
+}
+
+/* right side (total + checkout button) */
+.checkout-bar .right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  justify-content: flex-end;
+}
+
+.total {
+  font-weight: 800;
+  color: #d64b7a;
+  font-size: 1.2rem;
+}
+
+.checkout-btn {
+  background-color: #d64b7a;
+  color: #fff;
+  font-weight: 700;
+  padding: 10px 24px;
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+
+.checkout-btn:hover:not([disabled]) {
+  background-color: #c2436d;
+}
+
+.checkout-btn[disabled] {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* mobile layout */
+@media (max-width: 600px) {
+  .checkout-bar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .checkout-bar .right {
+    justify-content: space-between;
+  }
+
+  .checkout-btn {
+    width: 100%;
+  }
+}

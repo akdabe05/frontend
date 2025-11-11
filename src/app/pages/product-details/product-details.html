@@ -1,0 +1,32 @@
+<div class="product-details-container" *ngIf="product">
+  <div class="product-content">
+    <h2 class="product-name">{{ product.name }}</h2>
+
+    <div class="image-wrapper">
+  <img [src]="resolveImageUrl(product.imageUrl || '')" alt="{{ product.name }}" />
+    </div>
+
+    <div class="product-info">
+      <h3>ABOUT</h3>
+      <p>{{ product.description }}</p>
+
+      <div class="addons" *ngIf="addOns.length > 0">
+        <h4>ADD ON(S):</h4>
+        <label *ngFor="let addOn of addOns" class="addon-item">
+          <input type="checkbox" (change)="toggleAddOn(addOn, $event)" />
+          {{ addOn.name }} (+₱{{ addOn.price }})
+        </label>
+      </div>
+
+      <h3 class="total">Total: ₱{{ totalPrice }}</h3>
+
+      <button class="add-to-cart-btn" (click)="addToCart()">
+        Add to Cart
+      </button>
+    </div>
+  </div>
+</div>
+
+<div class="loading-container" *ngIf="!product">
+  <p>Loading product details...</p>
+</div>

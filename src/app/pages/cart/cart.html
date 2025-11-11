@@ -1,0 +1,38 @@
+<div class="cart-page">
+  <div class="cart-header">
+    <label class="select-all">
+      <input type="checkbox" [checked]="selectAll" (change)="toggleSelectAll($event)" />
+      Select All
+    </label>
+<button class="delete-selected" (click)="deleteSelected()" [disabled]="!hasSelected()">
+  <img src="assets/images/delete2.svg" alt="Delete Selected" class="delete-selected-icon" />
+</button>
+
+
+  </div>
+
+  <div class="cart-list">
+    <app-cart-item
+      *ngFor="let item of cartItems"
+      [item]="item"
+      (remove)="removeItem($event)"
+      (quantityChange)="onQuantityChange($event)"
+      (selectionChange)="onSelectionChange($event)">
+    </app-cart-item>
+
+    <div *ngIf="cartItems.length === 0" class="empty-cart">
+      <p>Your cart is empty.</p>
+    </div>
+  </div>
+
+  <div class="checkout-bar" role="region" aria-label="Checkout bar">
+    <div class="left">
+      <span class="selected-count">{{ selectedCount }} selected</span>
+    </div>
+
+    <div class="right">
+      <span class="total">Total: ₱{{ getSelectedTotal() | number:'1.0-0' }}</span>
+      <button class="checkout-btn" (click)="proceedToCheckout()" [disabled]="!hasSelected()">Check Out</button>
+    </div>
+  </div>
+</div>

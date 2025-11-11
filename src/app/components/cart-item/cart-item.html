@@ -1,0 +1,24 @@
+<div class="cart-item">
+  <div class="left-block">
+    <input class="select-checkbox" type="checkbox" [checked]="item.selected" (change)="toggleSelection($event)" />
+    <img [src]="item.imageUrl" [alt]="item.name" class="item-img" />
+  </div>
+
+  <div class="item-details">
+    <h3 class="item-name">{{ item.name }}</h3>
+    <p class="item-mod">Modification(s): {{ item.modification || 'None' }}</p>
+    <p class="item-price">₱{{ item.price | number:'1.0-0' }}</p>
+
+    <div class="quantity-controls" role="group" aria-label="Quantity">
+      <button class="qty-btn" (click)="decreaseQty()">-</button>
+      <span class="qty">{{ item.quantity }}</span>
+      <button class="qty-btn" (click)="increaseQty()">+</button>
+    </div>
+  </div>
+
+  <div class="right-block">
+    <button class="delete-btn" (click)="onRemove()" aria-label="Remove item">
+      <img src="assets/images/delete.svg" alt="Delete" class="delete-icon" />
+    </button>
+  </div>
+</div>
